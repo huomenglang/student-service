@@ -25,7 +25,7 @@ public abstract class AuditEntity<T extends Serializable> extends BaseEntity<T> 
 
     @Column(name = "updated_at",insertable = false)
     @LastModifiedDate
-    protected LocalDateTime updated_at;
+    protected LocalDateTime updatedAt;
 
     @Column(name = "updated_by",insertable = false)
     @LastModifiedBy

@@ -32,7 +32,7 @@ public class AcademicYear extends AuditEntity<Long>{
     @Column(length = 150)
     private String description;
 
-    @OneToMany(mappedBy = "academicYearId")
-    private Set<StudentEnrollment> enrollments=new HashSet<>();
+//    @OneToMany(mappedBy = "academicYearId")
+//    private Set<StudentEnrollment> enrollments=new HashSet<>();
 
 }
