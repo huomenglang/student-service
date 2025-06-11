@@ -56,6 +56,7 @@ public class Student extends AuditEntity<Long> {
     private Set<Parents> parents=new HashSet<>();
 
     @OneToMany(mappedBy = "student")
+    @Builder.Default
     private Set<StudentEnrollment> studentEnrollments=new HashSet<>();
 
 
