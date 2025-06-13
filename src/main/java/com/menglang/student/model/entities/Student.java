@@ -3,20 +3,22 @@ package com.menglang.student.model.entities;
 import com.menglang.student.model.audit.AuditEntity;
 import com.menglang.student.model.enums.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 
+@Setter
+@Getter
 @Builder
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "students",indexes = {@Index(name = "idx_student_name", columnList = "firstName,lastName")})
+@Entity
+@Table(name = "students", indexes = {
+        @Index(name = "idx_student_name", columnList = "first_name,last_name")
+})
 public class Student extends AuditEntity<Long> {
 
     @Column(name = "first_name", nullable = false, length = 30)
@@ -34,7 +36,7 @@ public class Student extends AuditEntity<Long> {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "phone_number",unique = true)
+    @Column(name = "phone_number", unique = true, nullable = false)
     private String phoneNumber;
 
     @Column(name = "address")
@@ -46,19 +48,15 @@ public class Student extends AuditEntity<Long> {
     @Column(name = "enrollment_date")
     private LocalDate enrollmentDate;
 
-    @Column(name = "parents")
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "student_parent",
-        joinColumns =@JoinColumn(name = "student_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "parents_id",referencedColumnName = "id")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "students_parent",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "parents_id")
     )
     @Builder.Default
-    private Set<Parents> parents=new HashSet<>();
+    private Set<Parents> parents = new HashSet<>();
 
     @OneToMany(mappedBy = "student")
     @Builder.Default
-    private Set<StudentEnrollment> studentEnrollments=new HashSet<>();
-
-
-
+    private Set<StudentEnrollment> studentEnrollments = new HashSet<>();
 }
