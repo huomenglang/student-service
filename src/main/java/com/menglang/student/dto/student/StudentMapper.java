@@ -1,13 +1,16 @@
 package com.menglang.student.dto.student;
 
+import com.menglang.student.dto.StudentEnrollment.StudentEnrollmentRequest;
 import com.menglang.student.dto.parent.ParentMapper;
+import com.menglang.student.dto.parent.ParentRequest;
 import com.menglang.student.dto.parent.ParentResponse;
 import com.menglang.student.model.entities.Parents;
 import com.menglang.student.model.entities.Student;
+import com.menglang.student.model.entities.StudentEnrollment;
 import com.menglang.student.repository.ParentRepository;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -46,5 +49,13 @@ public abstract class StudentMapper {
     protected List<ParentResponse> mapParentToResponse(Set<Parents> parentsList) {
         return parentsList.stream().map(parentMapper::toParentResponse).toList();
     }
+
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "updatedBy", ignore = true)
+    protected abstract void updateToEntity(StudentEnrollmentRequest request, @MappingTarget StudentEnrollment data);
 
 }

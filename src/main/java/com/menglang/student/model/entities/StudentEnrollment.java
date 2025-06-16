@@ -4,13 +4,13 @@ package com.menglang.student.model.entities;
 import com.menglang.student.model.audit.AuditEntity;
 import com.menglang.student.model.enums.StudentStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "student_enrollment")
 @Builder
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentEnrollment extends AuditEntity<Long> {
@@ -22,8 +22,8 @@ public class StudentEnrollment extends AuditEntity<Long> {
     private Long classId;
 
     @ManyToOne
-    @JoinColumn(name = "academic_year_id")
-    private AcademicYear academicYearId;
+    @JoinColumn(name = "academic_year")
+    private AcademicYear academicYear;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
