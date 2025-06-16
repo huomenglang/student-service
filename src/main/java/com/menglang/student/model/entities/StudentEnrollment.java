@@ -28,4 +28,7 @@ public class StudentEnrollment extends AuditEntity<Long> {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private StudentStatus status;
+
+    @Column(length = 200)
+    private String description;
 }

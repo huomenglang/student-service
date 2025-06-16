@@ -38,6 +38,7 @@ public class ParentServiceImpl implements ParentService {
     public ParentResponse update(Long id, ParentRequest dto) {
         Parents parent=this.getParentById(id);
 
+
         parentMapper.updateParentToEntity(dto,parent);
         try{
             Parents updatedParent= parentRepository.save(parent);
@@ -51,6 +52,7 @@ public class ParentServiceImpl implements ParentService {
     @Override
     public ParentResponse delete(Long id) {
         Parents parent=this.getParentById(id);
+
         try{
             parentRepository.deleteById(id);
             return parentMapper.toParentResponse(parent);
@@ -62,7 +64,9 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public Optional<ParentResponse> getById(Long id) {
+
         Parents parent=this.getParentById(id);
+        log.info("data parent family: {}",parent.getFamilyType());
         return Optional.ofNullable(parentMapper.toParentResponse(parent));
     }
 
