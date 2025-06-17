@@ -24,7 +24,8 @@ public record ParentRequest(
         String phoneNumber,
 
         @NotNull
-        FamilyType familyType,
+        @NotBlank
+        FamilyType position,
 
         String description
         ) implements Serializable {

@@ -3,7 +3,6 @@ package com.menglang.student.service.student;
 import com.menglang.student.dto.student.StudentMapper;
 import com.menglang.student.dto.student.StudentRequest;
 import com.menglang.student.dto.student.StudentResponse;
-import com.menglang.student.model.entities.Parents;
 import com.menglang.student.model.entities.Student;
 import com.menglang.student.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;

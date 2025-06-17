@@ -10,10 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ParentMapper {
 
-//    @Mapping(target = "students", ignore = true)
     Parents toParents(ParentRequest parentRequest);
 
-    @Mapping(target = "familyType", expression = "java(FamilyType.valueOf(parent.getFamilyType().toString().toUpperCase()))")
     ParentResponse toParentResponse(Parents parent);
 
     List<ParentResponse> toParentsList(List<Parents> parents);
