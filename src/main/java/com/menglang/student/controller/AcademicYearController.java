@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,29 +20,29 @@ public class AcademicYearController {
     private final AcademicService academicService;
 
     @PostMapping
-    public AcademicYearResponse addAcademicYear(@Valid @RequestBody AcademicYearRequest academicYear) {
+    public ResponseEntity<AcademicYearResponse> addAcademicYear(@Valid @RequestBody AcademicYearRequest academicYear) {
         log.info("Invoke post....");
-        return academicService.createAcademicYear(academicYear);
+        return ResponseEntity.ok(academicService.createAcademicYear(academicYear));
     }
 
     @GetMapping("/{id}")
-    public AcademicYearResponse getAcademicYearById(@PathVariable Long id) {
+    public ResponseEntity<AcademicYearResponse> getAcademicYearById(@PathVariable Long id) {
         log.info(" acadamic id : {} ",id);
-        return academicService.getAcademicYear(id);
+        return ResponseEntity.ok(academicService.getAcademicYear(id));
     }
 
     @PutMapping("/{id}")
-    public AcademicYearResponse updateAcademicYear(@PathVariable Long id, @RequestBody AcademicYearRequest academicYear) {
-        return academicService.updateAcademicYear(academicYear, id);
+    public ResponseEntity<AcademicYearResponse> updateAcademicYear(@PathVariable Long id, @RequestBody AcademicYearRequest academicYear) {
+        return ResponseEntity.ok(academicService.updateAcademicYear(academicYear, id));
     }
 
     @GetMapping("/get-all")
-    public List<AcademicYearResponse> getAllAcademicYear() {
-        return academicService.getAllAcademicYear();
+    public ResponseEntity<List<AcademicYearResponse>> getAllAcademicYear() {
+        return ResponseEntity.ok(academicService.getAllAcademicYear());
     }
 
     @DeleteMapping("/{id}")
-    public AcademicYearResponse deleteAcademicYear(@PathVariable Long id) {
-        return academicService.deleteAcademicYear(id);
+    public ResponseEntity<AcademicYearResponse> deleteAcademicYear(@PathVariable Long id) {
+        return ResponseEntity.ok(academicService.deleteAcademicYear(id));
     }
 }

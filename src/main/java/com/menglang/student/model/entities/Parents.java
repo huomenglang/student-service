@@ -5,6 +5,7 @@ import com.menglang.student.model.enums.FamilyType;
 import com.menglang.student.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
 
@@ -23,7 +24,7 @@ public class Parents extends AuditEntity<Long> implements Serializable {
     private String fullName;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false, length = 6)
+    @Column( nullable = false, length = 6)
     private Gender gender;
 
     @Column(name = "phone_number", nullable = false, unique = true)
@@ -31,7 +32,7 @@ public class Parents extends AuditEntity<Long> implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "family_type", nullable = false, length = 15)
-    private FamilyType familyType;
+    private FamilyType position;
 
     @Column(name = "description")
     private String description;

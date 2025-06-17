@@ -23,10 +23,9 @@ public class ParentServiceImpl implements ParentService {
     @Override
     public ParentResponse create(ParentRequest dto) throws RuntimeException {
         try {
-            log.info("name: {} phone: {} gender: {} family_type: {}",dto.fullName(),dto.phoneNumber(),dto.gender(),dto.familyType());
             Parents parent = parentMapper.toParents(dto);
-            log.info("data: {} gender {} family {} desc {}",parent.getFullName(),parent.getGender(),parent.getFamilyType(),parent.getDescription());
             Parents parentCreated = parentRepository.save(parent);
+            log.info("data position: {}",parentCreated.getPosition());
            return parentMapper.toParentResponse(parentCreated);
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
@@ -64,9 +63,8 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public Optional<ParentResponse> getById(Long id) {
-
         Parents parent=this.getParentById(id);
-        log.info("data parent family: {}",parent.getFamilyType());
+        log.info(" data parents: {}",parent.getPosition());
         return Optional.ofNullable(parentMapper.toParentResponse(parent));
     }
 

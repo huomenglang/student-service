@@ -10,7 +10,7 @@ public record ParentResponse(
         Long id,
         String fullName,
         Gender gender,
-        FamilyType familyType,
+        FamilyType position,
         String phoneNumber,
         String description,
         LocalDateTime createdAt,

@@ -2,7 +2,6 @@ package com.menglang.student.dto.student;
 
 import com.menglang.student.dto.StudentEnrollment.StudentEnrollmentRequest;
 import com.menglang.student.dto.parent.ParentMapper;
-import com.menglang.student.dto.parent.ParentRequest;
 import com.menglang.student.dto.parent.ParentResponse;
 import com.menglang.student.model.entities.Parents;
 import com.menglang.student.model.entities.Student;
@@ -30,7 +29,7 @@ public abstract class StudentMapper {
         this.parentRepository = parentRepository;
     }
 
-    @Mapping(target = "studentEnrollments",ignore = true)
+//    @Mapping(target = "studentEnrollments",ignore = true)
     @Mapping(target = "parents", expression = "java(mapParent(studentRequest.parents()))")
     public abstract Student toStudent(StudentRequest studentRequest);
 
@@ -56,6 +55,8 @@ public abstract class StudentMapper {
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "updatedBy", ignore = true)
-    protected abstract void updateToEntity(StudentEnrollmentRequest request, @MappingTarget StudentEnrollment data);
+//    @Mapping(target = "studentEnrollments",ignore = true)
+    @Mapping(target = "parents",expression = "java(mapParent(request.parents()))")
+    protected abstract void updateToEntity(StudentRequest request, @MappingTarget Student data);
 
 }
