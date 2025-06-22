@@ -3,13 +3,14 @@ package com.menglang.student.controller;
 import com.menglang.student.dto.parent.ParentRequest;
 import com.menglang.student.dto.parent.ParentResponse;
 import com.menglang.student.service.parent.ParentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RequestMapping("api/v1/parents")
+@RequestMapping("/api/v1/parents")
 @RestController
 @RequiredArgsConstructor
 public class ParentController {
@@ -21,7 +22,7 @@ public class ParentController {
     }
 
     @PostMapping
-    public ParentResponse createParent(@RequestBody ParentRequest data){
+    public ParentResponse createParent(@Valid @RequestBody ParentRequest data){
         return parentService.create(data);
     }
 

@@ -1,7 +1,7 @@
 package com.menglang.student.controller;
 import com.menglang.student.dto.student.StudentRequest;
 import com.menglang.student.dto.student.StudentResponse;
-import com.menglang.student.service.student.StudentService;
+import com.menglang.student.service.Student.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

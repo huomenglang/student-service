@@ -1,8 +1,10 @@
 package com.menglang.student.dto.academicYear;
+import com.menglang.common.library.page.paginate.BasePageResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AcademicYearResponse {
+public class AcademicYearResponse extends BasePageResponse {
     private Long id;
     private String name;
     private LocalDate startDate;

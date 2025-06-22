@@ -1,12 +1,13 @@
 package com.menglang.student.service.AcademicYear;
 
+import com.menglang.common.library.exceptions.common.BadRequestException;
+import com.menglang.common.library.exceptions.common.NotFoundException;
 import com.menglang.student.dto.academicYear.AcademicYearMapper;
 import com.menglang.student.dto.academicYear.AcademicYearRequest;
 import com.menglang.student.dto.academicYear.AcademicYearResponse;
 import com.menglang.student.model.entities.AcademicYear;
 import com.menglang.student.repository.AcademicYearRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class AcademicYearServiceImpl implements AcademicService{
           AcademicYear savedAcademicYear= academicYearRepository.save(academicYear);
           return academicYearMapper.toAcademicYearResponse(savedAcademicYear);
        }catch (Exception e){
-           throw new RuntimeException(e.getMessage());
+           throw new BadRequestException(e.getMessage());
        }
     }
 
@@ -42,7 +43,7 @@ public class AcademicYearServiceImpl implements AcademicService{
             AcademicYear savedAcademicYear= academicYearRepository.save(academicYearToUpdate);
             return academicYearMapper.toAcademicYearResponse(savedAcademicYear);
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            throw new BadRequestException(e.getMessage());
         }
 
     }
@@ -53,8 +54,9 @@ public class AcademicYearServiceImpl implements AcademicService{
         try{
             academicYearRepository.delete(academicYear);
             return academicYearMapper.toAcademicYearResponse(academicYear);
+
         }catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            throw new BadRequestException(e.getMessage());
         }
 
     }
@@ -65,6 +67,6 @@ public class AcademicYearServiceImpl implements AcademicService{
     }
 
     private AcademicYear findAcademicYearById(Long academicYearId) {
-        return academicYearRepository.findById(academicYearId).orElseThrow(()->new RuntimeException("Not Found!"));
+        return academicYearRepository.findById(academicYearId).orElseThrow(()->new NotFoundException("Not Found!"));
     }
 }

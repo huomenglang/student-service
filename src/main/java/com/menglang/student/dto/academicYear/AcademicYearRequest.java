@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 public class AcademicYearRequest {
 
-    @NotNull
+    @NotNull(message = "Name Must not Be null!")
     @NotBlank(message = "Name is Require!")
     @Size(min = 5,message = "Name must be greater than 5 characters!")
     private String name;

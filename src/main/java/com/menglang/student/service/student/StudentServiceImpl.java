@@ -1,4 +1,4 @@
-package com.menglang.student.service.student;
+package com.menglang.student.service.Student;
 
 import com.menglang.student.dto.student.StudentMapper;
 import com.menglang.student.dto.student.StudentRequest;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;
 private final StudentRepository studentRepository;
 
