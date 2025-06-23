@@ -2,15 +2,25 @@ package com.menglang.student.service.AcademicYear;
 
 import com.menglang.common.library.exceptions.common.BadRequestException;
 import com.menglang.common.library.exceptions.common.NotFoundException;
+import com.menglang.common.library.page.filter.FilterBy;
+import com.menglang.common.library.page.parser.BaseSpecification;
+import com.menglang.common.library.page.parser.PageableParser;
+import com.menglang.common.library.page.parser.QueryParamParser;
 import com.menglang.student.dto.academicYear.AcademicYearMapper;
 import com.menglang.student.dto.academicYear.AcademicYearRequest;
+import com.menglang.student.dto.academicYear.AcademicYearRequestParam;
 import com.menglang.student.dto.academicYear.AcademicYearResponse;
 import com.menglang.student.model.entities.AcademicYear;
 import com.menglang.student.repository.AcademicYearRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -62,8 +72,14 @@ public class AcademicYearServiceImpl implements AcademicService{
     }
 
     @Override
-    public List<AcademicYearResponse> getAllAcademicYear() {
-        return academicYearMapper.toAcademicYearResponse(academicYearRepository.findAll());
+    public Page<AcademicYear> getAllAcademicYear(Map<String,String> params) {
+
+        Pageable pageable = PageableParser.from(params);
+        List<FilterBy> filters = QueryParamParser.parse(params);
+        Specification<AcademicYear> spec = new BaseSpecification<>(filters);
+        Page<AcademicYear> academicYearPage= academicYearRepository.findAll(spec,pageable);
+
+        return academicYearPage;
     }
 
     private AcademicYear findAcademicYearById(Long academicYearId) {
