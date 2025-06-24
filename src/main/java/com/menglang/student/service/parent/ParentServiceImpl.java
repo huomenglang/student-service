@@ -1,6 +1,7 @@
 package com.menglang.student.service.parent;
 
 import com.menglang.common.library.exceptions.common.BadRequestException;
+import com.menglang.common.library.exceptions.common.ConflictException;
 import com.menglang.common.library.exceptions.common.NotFoundException;
 import com.menglang.common.library.page.filter.FilterBy;
 import com.menglang.common.library.page.parser.BaseSpecification;
@@ -35,9 +36,10 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     public ParentResponse create(ParentRequest dto) throws RuntimeException {
+        if(Boolean.TRUE.equals(this.findParentByPhone(dto.phoneNumber(),null))) throw new ConflictException("Phone Number Already Exist.");
         try {
             Parents parent = parentMapper.toParents(dto);
-            log.info("Parent: {}",parent.getPosition());
+
             Parents parentCreated = parentRepository.save(parent);
            return parentMapper.toParentResponse(parentCreated);
         } catch (BadRequestException e) {
@@ -53,6 +55,7 @@ public class ParentServiceImpl implements ParentService {
     @Override
     public ParentResponse update(Long id, ParentRequest dto) {
         Parents parent=this.getParentById(id);
+        if(Boolean.TRUE.equals(this.findParentByPhone(dto.phoneNumber(),id))) throw new ConflictException("Phone Number Already Exist.");
         parentMapper.updateParentToEntity(dto,parent);
         try{
             Parents updatedParent= parentRepository.save(parent);
@@ -81,7 +84,6 @@ public class ParentServiceImpl implements ParentService {
             log.info("Create Parent: {}",e.getMessage());
             throw new BadRequestException("Unable to Delete Parent!");
         }
-
     }
 
     @Override
@@ -96,6 +98,9 @@ public class ParentServiceImpl implements ParentService {
 
     private Parents getParentById(Long id){
         return parentRepository.findById(id).orElseThrow(()->new NotFoundException("Not Found!"));
+    }
+    private boolean findParentByPhone(String phoneNumber,Long pId){
+        return parentRepository.findParentByPhoneNumber(phoneNumber,pId);
     }
 
     @Override

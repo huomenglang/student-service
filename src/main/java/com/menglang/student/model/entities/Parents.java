@@ -15,9 +15,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "parents", indexes = {
-        @Index(name = "idx_parents_name", columnList = "full_name,phone_number")
-})
+@Table(name = "parents",
+        indexes = {
+                @Index(name = "idx_parents_name", columnList = "full_name"),
+                @Index(name = "idx_phone_number",columnList = "phone_number")
+        }
+)
 public class Parents extends AuditEntity<Long> implements Serializable {
 
     @Column(name = "full_name", nullable = false, length = 50)

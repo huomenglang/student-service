@@ -1,5 +1,6 @@
 package com.menglang.student.dto.student;
 
+import com.menglang.common.library.exceptions.common.NotFoundException;
 import com.menglang.student.dto.StudentEnrollment.StudentEnrollmentRequest;
 import com.menglang.student.dto.parent.ParentMapper;
 import com.menglang.student.dto.parent.ParentResponse;
@@ -37,7 +38,7 @@ public abstract class StudentMapper {
     protected Set<Parents> mapParent(List<Long> parentIds) {
 
         return parentIds.stream().map(
-                p -> parentRepository.findById(p).orElseThrow(() -> new RuntimeException(p + " Parent Not Found!"))
+                p -> parentRepository.findById(p).orElseThrow(() -> new NotFoundException(p + " Parent Not Found!"))
         ).collect(Collectors.toSet());
     }
 
@@ -57,6 +58,6 @@ public abstract class StudentMapper {
     @Mapping(target = "updatedBy", ignore = true)
 //    @Mapping(target = "studentEnrollments",ignore = true)
     @Mapping(target = "parents",expression = "java(mapParent(request.parents()))")
-    protected abstract void updateToEntity(StudentRequest request, @MappingTarget Student data);
+    public abstract void updateToEntity(StudentRequest request, @MappingTarget Student data);
 
 }
