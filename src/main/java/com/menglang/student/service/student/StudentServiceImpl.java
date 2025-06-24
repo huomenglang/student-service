@@ -80,7 +80,6 @@ public class StudentServiceImpl implements StudentService {
             log.info("Unable to create student {} ",e.getMessage());
             throw new BadRequestException(e.getMessage());
         }
-
     }
 
     @Override
