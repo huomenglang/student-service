@@ -1,11 +1,9 @@
 package com.menglang.student.controller;
 import com.menglang.student.dto.student.StudentRequest;
 import com.menglang.student.dto.student.StudentResponse;
-import com.menglang.student.service.Student.StudentService;
+import com.menglang.student.service.student.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/students")
@@ -15,7 +13,7 @@ public class StudentController {
 
 
     @GetMapping("/{id}")
-    public Optional<StudentResponse> getParentById(@PathVariable Long id){
+    public StudentResponse getParentById(@PathVariable Long id){
         return studentService.getById(id);
     }
 
@@ -32,5 +30,6 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public StudentResponse deleteParent(@PathVariable Long id){
         return studentService.delete(id);
-    }}
+    }
+}
 

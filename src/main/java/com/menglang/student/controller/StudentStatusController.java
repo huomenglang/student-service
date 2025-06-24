@@ -20,10 +20,10 @@ public class StudentStatusController {
         return ResponseEntity.ok(studentYearlyStatusService.create(dto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<StudentStatusResponse>> getById(@PathVariable Long id){
-        return ResponseEntity.ok(studentYearlyStatusService.getById(id));
-    }
+//    @GetMapping("/{id}")
+//    public StudentStatusResponse getById(@PathVariable Long id){
+//        return ResponseEntity.ok(studentYearlyStatusService.getById(id));
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<StudentStatusResponse> update(@PathVariable Long id,@RequestBody StudentStatusRequest dto){

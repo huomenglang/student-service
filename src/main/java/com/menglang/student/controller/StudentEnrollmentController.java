@@ -21,7 +21,7 @@ public class StudentEnrollmentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<StudentEnrollmentResponse> create(@PathVariable Long id){
+    public StudentEnrollmentResponse create(@PathVariable Long id){
         return studentEnrollmentService.getById(id);
     }
 
