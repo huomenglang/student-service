@@ -1,11 +1,11 @@
 package com.menglang.student.model.entities;
 
+import com.menglang.student.dto.parent.FamilyTypeConverter;
 import com.menglang.student.model.audit.AuditEntity;
 import com.menglang.student.model.enums.FamilyType;
 import com.menglang.student.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
 
@@ -30,7 +30,8 @@ public class Parents extends AuditEntity<Long> implements Serializable {
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
+    @Convert(converter = FamilyTypeConverter.class)
     @Column(name = "family_type", nullable = false, length = 15)
     private FamilyType position;
 

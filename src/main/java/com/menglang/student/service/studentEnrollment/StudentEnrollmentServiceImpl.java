@@ -53,9 +53,9 @@ public class StudentEnrollmentServiceImpl implements StudentEnrollmentService{
     }
 
     @Override
-    public Optional<StudentEnrollmentResponse> getById(Long id) {
+    public StudentEnrollmentResponse getById(Long id) {
         StudentEnrollment studentEnrollment=this.findById(id);
-        return Optional.ofNullable(mapper.toResponse(studentEnrollment));
+        return mapper.toResponse(studentEnrollment);
     }
 
     private StudentEnrollment findById(Long id){

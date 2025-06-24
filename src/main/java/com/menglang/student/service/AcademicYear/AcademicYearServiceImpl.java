@@ -31,6 +31,7 @@ public class AcademicYearServiceImpl implements AcademicService{
     @Override
     public AcademicYearResponse createAcademicYear(AcademicYearRequest academicYearRequest) {
         AcademicYear academicYear = academicYearMapper.toAcademicYear(academicYearRequest);
+        if(Boolean.TRUE.equals(this.checkExistAcademicYear(academicYearRequest.getName()))) throw new BadRequestException("Academic Year Already Exist!");
        try{
           AcademicYear savedAcademicYear= academicYearRepository.save(academicYear);
           return academicYearMapper.toAcademicYearResponse(savedAcademicYear);
@@ -48,6 +49,7 @@ public class AcademicYearServiceImpl implements AcademicService{
     @Override
     public AcademicYearResponse updateAcademicYear(AcademicYearRequest academicYearRequest, Long academicYearId) {
         AcademicYear academicYearToUpdate = this.findAcademicYearById(academicYearId);
+        if(Boolean.TRUE.equals(this.checkExistAcademicYear(academicYearRequest.getName()))) throw new BadRequestException("Academic Year Already Exist!");
         academicYearMapper.updateAcademicYearToEntity(academicYearRequest, academicYearToUpdate);
         try {
             AcademicYear savedAcademicYear= academicYearRepository.save(academicYearToUpdate);
@@ -84,5 +86,8 @@ public class AcademicYearServiceImpl implements AcademicService{
 
     private AcademicYear findAcademicYearById(Long academicYearId) {
         return academicYearRepository.findById(academicYearId).orElseThrow(()->new NotFoundException("Not Found!"));
+    }
+    private Boolean checkExistAcademicYear(String name){
+        return academicYearRepository.isAcademicExist(name);
     }
 }

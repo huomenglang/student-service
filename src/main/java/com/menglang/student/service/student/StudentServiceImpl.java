@@ -1,14 +1,14 @@
-package com.menglang.student.service.Student;
+package com.menglang.student.service.student;
 
 import com.menglang.student.dto.student.StudentMapper;
 import com.menglang.student.dto.student.StudentRequest;
 import com.menglang.student.dto.student.StudentResponse;
 import com.menglang.student.model.entities.Student;
 import com.menglang.student.repository.StudentRepository;
+import com.menglang.student.service.student.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -46,9 +46,9 @@ private final StudentRepository studentRepository;
     }
 
     @Override
-    public Optional<StudentResponse> getById(Long id) {
+    public StudentResponse getById(Long id) {
         Student student=this.getStudentById(id);
-        return Optional.ofNullable(studentMapper.studentResponse(student));
+        return studentMapper.studentResponse(student);
     }
 
     private Student getStudentById(Long id){

@@ -55,9 +55,9 @@ public class StudentYearlyStatusServiceImpl implements StudentYearlyStatusServic
     }
 
     @Override
-    public Optional<StudentStatusResponse> getById(Long id) {
+    public StudentStatusResponse getById(Long id) {
         var studentYearlyStatus=this.findStudentStatusById(id);
-        return Optional.ofNullable(studentStatusMapper.toResponse(studentYearlyStatus));
+        return studentStatusMapper.toResponse(studentYearlyStatus);
     }
 
     private StudentYearlyStatus findStudentStatusById(Long id){
