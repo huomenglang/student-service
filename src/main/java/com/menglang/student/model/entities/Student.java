@@ -18,7 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "students", indexes = {
-        @Index(name = "idx_student_name", columnList = "first_name,last_name")
+        @Index(name = "idx_student_name", columnList = "first_name,last_name"),
+        @Index(name = "idx_student_phone",columnList = "phoneNumber")
 })
 public class Student extends AuditEntity<Long> implements Serializable {
 

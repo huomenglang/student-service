@@ -23,6 +23,5 @@ public class StudentYearlyStatus extends AuditEntity<Long> {
     @JoinColumn(name = "academic_year_id")
     private AcademicYear academicYear;
 
-
     private StudentStatus status;
 }

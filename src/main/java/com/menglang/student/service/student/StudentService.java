@@ -1,9 +1,13 @@
-package com.menglang.student.service.Student;
+package com.menglang.student.service.student;
 import com.menglang.student.dto.student.StudentRequest;
 import com.menglang.student.dto.student.StudentResponse;
+import com.menglang.student.model.entities.Student;
 import com.menglang.student.service.BaseService;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
 
-@Repository
+import java.util.Map;
+
 public interface StudentService extends BaseService<StudentRequest, StudentResponse> {
+
+    public Page<Student> getAll(Map<String,String> param);
 }

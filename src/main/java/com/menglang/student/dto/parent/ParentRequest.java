@@ -24,7 +24,6 @@ public record ParentRequest(
         String phoneNumber,
 
         @NotNull
-        @NotBlank
         FamilyType position,
 
         String description
