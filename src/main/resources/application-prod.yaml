@@ -7,7 +7,7 @@ spring:
     name: student
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5454/school_management
+    url: jdbc:postgresql://localhost:5432/school_management
     #url: jdbc:postgresql://postgres:5432/ac_service # account_db  get from NAMES of postgres build container using network
     username: postgres
     password: lang@123
@@ -23,3 +23,18 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: false
     show-sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    com:
+      menglang:
+        doctor: debug
+info:
+  app:
+    name: Student Microservice
+    description: Menglang Student Service
+    version: 1.0.0 (get from build gradle)
